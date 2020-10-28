@@ -1,32 +1,46 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-screen">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <SidebarNav />
     </div>
-    <router-view />
+    <div id="view">
+      <router-view />
+    </div>
   </div>
 </template>
 
+<script>
+import SidebarNav from "@/components/SidebarNav.vue";
+
+export default {
+  components: {
+    SidebarNav
+  }
+};
+</script>
+
 <style lang="scss">
+body {
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: grid;
+  grid-template:
+    "l m r" 1fr
+    / min-content 1fr 0;
+}
+
+#view {
+  grid-area: m;
 }
 
 #nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  grid-area: l;
 }
 </style>
