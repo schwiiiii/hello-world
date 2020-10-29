@@ -2,8 +2,20 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import {
+  faHome,
+  faQuestion,
+  faAngleUp,
+  faAngleLeft
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faHome, faQuestion, faAngleUp, faAngleLeft);
 
 import "@/assets/css/tailwind.css";
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
