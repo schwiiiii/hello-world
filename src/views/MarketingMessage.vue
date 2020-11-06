@@ -23,7 +23,7 @@
     slides: [
         {
             title: 'Slide 1 Title Text',
-            body: 'this is slide 1\'s body content',
+            body: "&lt;p&gt;this is slide 1's body content&lt;/p&gt;&lt;p&gt;now with a second line&lt;/p&gt;",
             image: 'slide1.jpg'
             cta: {
                 text: "Click me",
@@ -33,7 +33,7 @@
         },
         {
             title: 'Slide 2 Title Text',
-            body: 'this is slide 2\'s body content',
+            body: "&lt;p&gt;this is slide 2's body content&lt;/p&gt;",
             image: 'slide2.jpg'
             cta: {
                 text: "Click me",
