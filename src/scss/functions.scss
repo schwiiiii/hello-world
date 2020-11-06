@@ -1,0 +1,52 @@
+// Removes unit from numbers ( changes 24px to just 24 )
+
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+$sm-screen: 576px;
+$md-screen: 768px;
+$lg-screen: 992px;
+$xl-screen: 1200px;
+
+// Fluid Sizing
+// Currently this only works with px measurements
+
+// x-axis: screen-size, y-axis: calculated value of $attribute (font-size, padding, etc...)
+
+//                 max-vw
+//                   |
+//                   ▼_____ max-size
+//                  ╱
+//  min-size _____ ╱
+//                ▲
+//                |
+//              min-vw
+
+@mixin fluid-size($min-size, $max-size, $attribute, $min-vw: $sm-screen, $max-vw: $xl-screen) {
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-size);
+    $u4: unit($max-size);
+
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+        & {
+            #{$attribute}: $min-size;
+
+            @media screen and (min-width: $min-vw) {
+                #{$attribute}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+
+            @media screen and (min-width: $max-vw) {
+                #{$attribute}: $max-size;
+            }
+        }
+    }
+}

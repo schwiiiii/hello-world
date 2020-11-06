@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="h-screen">
-    <Component :is="nav" @switchHeader="setNav" />
-    <div id="view">
+    <Component :is="nav" @switchHeader="setNav" :nav-list="navList" />
+    <div id="view" :class="[nav == 'HeaderNav' ? 'top' : 'left']">
       <transition
         :name="transitionName"
         mode="out-in"
@@ -25,7 +25,19 @@ export default {
   data() {
     return {
       transitionName: DEFAULT_TRANSITION,
-      nav: "HeaderNav"
+      nav: "HeaderNav",
+      navList: [
+        {
+          name: "Home",
+          path: "/",
+          icon: "home"
+        },
+        {
+          name: "Marketing Message",
+          path: "/marketing-message",
+          icon: "images"
+        }
+      ]
     };
   },
   components: {
@@ -71,6 +83,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/scss/functions";
+
+// initial layout
 body {
   margin: 0;
 }
@@ -79,29 +94,33 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   display: grid;
   height: 100vh;
   overflow: hidden;
-  max-width: calc(1040px + 400px);
+  max-width: 1040px;
   margin: 0 auto;
   grid-template:
-    "lt mt rt" min-content
-    "l m r" 1fr
-    / 200px 1fr 200px;
+    "lt rt" min-content
+    "l r" 1fr
+    / 200px 1fr;
 }
 
 #view {
   padding: 1rem;
   overflow: auto;
-  grid-area: m;
+  grid-area: r;
+
+  &.top {
+    grid-area: l-start / l-start / r-end / r-end;
+  }
 }
 
 #nav {
   grid-area: l;
 }
 
+// Page animations
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;

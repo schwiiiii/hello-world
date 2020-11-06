@@ -7,7 +7,10 @@
             class="px-4 py-1 bg-white text-black tracking-wide rounded-full uppercase text-xs hover:bg-gray-200 transition duration-150 ease-out"
             exact-active-class="bg-green-500 text-white hover:bg-green-600"
             :to="nav.path"
-            ><font-awesome-icon :icon="nav.icon" class="mr-1"></font-awesome-icon
+            ><font-awesome-icon
+              :icon="nav.icon"
+              class="mr-1"
+            ></font-awesome-icon
             >{{ nav.name }}</router-link
           >
         </li>
@@ -15,8 +18,11 @@
           <a
             class="px-4 py-1 bg-white text-black tracking-wide rounded-full uppercase text-xs hover:bg-gray-200 transition duration-150 ease-out cursor-pointer"
             @click.prevent="switchHeader('SidebarNav')"
-            ><font-awesome-icon icon="angle-left" class="mr-1"></font-awesome-icon>Sidebar
-            Nav</a
+            ><font-awesome-icon
+              icon="angle-left"
+              class="mr-1"
+            ></font-awesome-icon
+            >Sidebar Nav</a
           >
         </li>
       </ul>
@@ -26,22 +32,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      navList: [
-        {
-          name: "Home",
-          path: "/",
-          icon: "home"
-        },
-        {
-          name: "About",
-          path: "/about",
-          icon: "question"
-        }
-      ]
-    };
-  },
+  props: ["navList"],
   methods: {
     switchHeader(comp) {
       this.$emit("switchHeader", comp);
